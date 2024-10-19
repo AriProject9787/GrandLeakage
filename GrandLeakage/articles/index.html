@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Grand-Leak.com</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="body">
+    <header>
+        <h1 class="title"><marquee><span class="highlight">Grand-Leak.com </span>- News Portal.Com</marquee></h1>
+        <nav class="nav">
+            <a href="https://www.instagram.com/masstalkies.mt/"><div class="instagram"><ion-icon name="logo-instagram"></ion-icon></div></a>
+            <button class="buttonLogin">Login</button>
+        </nav>
+    </header>
+    <div id="cover" class="cover">
+        <div class="wrapper" >
+        <span class="closeIcon"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="loginBox">
+            <h2>Login</h2>  
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" name="email" id="emailL" required>
+                    <label>Email</label>
+                </div>
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" name="password" id="passwordL" required>
+                    <label>Password</label>
+                </div>
+               <input type="submit" id="signin" value="Login" class="btn">
+                <div class="loginRegister">
+                    <p>Don't Have an account  <a href="#" class="registerlink">Register</a></p>
+                </div>  
+        </div>
+
+        <div class="registerBox">
+            <h2>Register</h2>
+            <div class="form">
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" name="email" id="emailC" required>
+                    <label>Email</label>
+                </div>
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" name="password" id="passwordC" required>
+                    <label>Password</label>
+                </div>
+                <input type="submit" id="signup" value="Create Account" class="btn">
+                <div class="loginRegister">
+                    <p> Alredy have an account  <a href="#" class="loginlink">Login</a></p>
+                </div>
+            </div>
+            
+        </div>
+
+
+        </div>
+    </div>
+    
+    <main id="main">
+        <section id="top-news">
+            <h2>News</h2>
+            <div id="news-articles">
+                <!-- News articles will be dynamically added here -->
+            </div>
+            <div class="pagination">
+                <button id="prev-btn" disabled>Previous</button>
+                <span id="page-info"></span>
+                <button id="next-btn" disabled>Next</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <a href="https://www.instagram.com/masstalkies.mt/"><div class="instagram"><ion-icon name="logo-instagram"></ion-icon></div></a>
+        <p><span class="highlight">&copy; 2024 News Portal.</span> All rights reserved.</p>
+    </footer>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDH91jgSKu8tZ2ejyAHwfdTgC5TcqJ4S_k",
+            authDomain: "tutinews9787.firebaseapp.com",
+            databaseURL: "https://tutinews9787-default-rtdb.firebaseio.com",
+            projectId: "tutinews9787",
+            storageBucket: "tutinews9787.appspot.com",
+            messagingSenderId: "119887551138",
+            appId: "1:119887551138:web:a2bf8fb758b0eed01015fb",
+            measurementId: "G-XWL9RWC9LN"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
+        const auth = getAuth();
+
+        let allArticles = [];
+        let currentPage = 1;
+        const articlesPerPage = 2;
+
+        const newsContainer = document.getElementById('news-articles');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const pageInfo = document.getElementById('page-info');
+
+        // Fetch articles from Firebase
+        function fetchArticles() {
+            const dbRef = ref(db, 'news');
+            get(dbRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    allArticles = Object.values(snapshot.val());
+                    displayArticles();
+                    updatePaginationControls();
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        // Display articles based on the current page
+        function displayArticles() {
+            newsContainer.innerHTML = '';
+            const startIndex = (currentPage - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            const currentArticles = allArticles.slice(startIndex, endIndex);
+
+            currentArticles.forEach(article => {
+                const articleHTML = `
+                    <article class="artical">
+                        <div class="newsArtical">
+                            <table>
+                                <tr>
+                                    <td class="td1">
+                                        <small class="newsSmall">${article.Datetime}</small>
+                                        <img src="${article.ImgUrl}" class="newsImg">
+                                        <a href="news-article.html?title=${article.Title}"><h4 class="newsTitle">${article.Title}</h4></a>
+                                    </td>
+                                    <td class="td2">
+                                        <h5 class="newsSubject">${article.Subject}</h5>
+                                        <p class="newsContent">${article.Content}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                `;
+                newsContainer.innerHTML += articleHTML;
+            });
+        }
+
+        // Update pagination controls
+        function updatePaginationControls() {
+            pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(allArticles.length / articlesPerPage)}`;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage * articlesPerPage >= allArticles.length;
+        }
+
+        // Event listeners for pagination buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayArticles();
+                updatePaginationControls();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage * articlesPerPage < allArticles.length) {
+                currentPage++;
+                displayArticles();
+                updatePaginationControls();
+            }
+        });
+
+        // Initial fetch of articles
+        fetchArticles();
+
+
+                
+    // Create new user account .....
+    signup.addEventListener("click",(e)=>{
+      var email=document.getElementById("emailC").value;
+      var password=document.getElementById("passwordC").value;
+      console.log(auth);
+     
+      createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        const user = userCredential.user;
+        console.log("created New user account successfully....");
+        alert("created New user account successfully....");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        console.log(errorMessage)
+      });
+    })
+    // Login to new usert account ... 
+    signin.addEventListener("click",(e)=>{
+      var email=document.getElementById("emailL").value;
+      var password=document.getElementById("passwordL").value;
+    
+      signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        const user = userCredential.user;
+        console.log("successfully loggedin",user);   
+        window.location.href="upload.html";
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        console.log(errorMessage)     
+      });
+
+    })
+
+
+
+
+    </script>
+    <script src="login1.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Article</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>News Article</h1>
+    </header>
+    <main id="news-article">
+        <!-- Article content will be displayed here -->
+    </main>
+    
+
+    <script type="module">
+        // Import the firebase library
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, ref,set, child, get} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+        //firebase api key
+        const firebaseConfig = {
+            apiKey: "AIzaSyDH91jgSKu8tZ2ejyAHwfdTgC5TcqJ4S_k",
+            authDomain: "tutinews9787.firebaseapp.com",
+            databaseURL: "https://tutinews9787-default-rtdb.firebaseio.com",
+            projectId: "tutinews9787",
+            storageBucket: "tutinews9787.appspot.com",
+            messagingSenderId: "119887551138",
+            appId: "1:119887551138:web:a2bf8fb758b0eed01015fb",
+            measurementId: "G-XWL9RWC9LN"
+        };
+
+        // Initialize Firebase variable
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
+        const dbref=ref(db,'news/')
+        const auth = getAuth();
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get('title');
+        console.log(title);
+        get(child(dbref, `/${title}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+            const data = snapshot.val();
+            const section = document.getElementById("news-article");
+            console.log(data);
+            console.log(data.Content);
+    
+    // HTML elements to display the data
+            const articleContainer = document.getElementById('news-article');
+            articleContainer.innerHTML = `
+            <small>${data.Datetime}</small><br>
+            <img src="${data.ImgUrl}" alt=".">
+            <h1 >${title}</h1>
+            <h2>${data.Subject}</h2>
+            <p>${data.Content}</p>
+            `;
+            }
+        });
+        
+                    
+
+        </script>
+
+
+</body>
+</html>

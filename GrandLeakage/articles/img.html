@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase Image Upload</title>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@8.2.1/dist/firebase.js"></script>
+</head>
+<body>
+  <h1>Firebase Image Upload</h1>
+  <form id="image-form">
+    <input type="file" id="image-input" accept="image/*">
+    <button id="upload-button">Upload Image</button>
+  </form>
+  <div id="upload-status"></div>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+            apiKey: "AIzaSyDH91jgSKu8tZ2ejyAHwfdTgC5TcqJ4S_k",
+            authDomain: "tutinews9787.firebaseapp.com",
+            databaseURL: "https://tutinews9787-default-rtdb.firebaseio.com",
+            projectId: "tutinews9787",
+            storageBucket: "tutinews9787.appspot.com",
+            messagingSenderId: "119887551138",
+            appId: "1:119887551138:web:a2bf8fb758b0eed01015fb",
+            measurementId: "G-XWL9RWC9LN"
+        };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the Firebase Storage bucket
+    var storageRef = firebase.storage().ref();
+
+    // Get references to the form elements
+    var form = document.getElementById('image-form');
+    var fileInput = document.getElementById('image-input');
+    var uploadButton = document.getElementById('upload-button');
+    var uploadStatus = document.getElementById('upload-status');
+
+    // Add an event listener to the upload button
+    uploadButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Please select an image file');
+        return;
+      }
+
+      // Create a new upload task
+      const uploadTask = storageRef.child('images/' + file.name).put(file);
+
+      // Monitor the upload progress
+      uploadTask.on('state_changed', (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        uploadStatus.innerHTML = `Upload progress: ${progress}%`;
+      }, (error) => {
+        console.error('Error uploading file:', error);
+        uploadStatus.innerHTML = 'Error uploading file';
+      }, () => {
+        // Get the download URL of the uploaded file
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log(`File uploaded successfully! Download URL: ${downloadURL}`);
+          uploadStatus.innerHTML = `File uploaded successfully! Download URL: ${downloadURL}`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

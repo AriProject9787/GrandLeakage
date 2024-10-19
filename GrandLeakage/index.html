@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrandLeakage.com</title>
+    <link rel="stylesheet" href="login1.css">
+
+</head>
+<body class="body">
+    <header>
+        <h2 class="logo"><marquee><span class="title">GrandLeakage</span>.Com</marquee></h2>
+        <nav class="navigation">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a class="chat">Group Chat</a>
+            <a href="contact.html">Contact</a>
+            <button class="buttonLogin">Login</button>
+
+        </nav>
+    </header>
+    <div class="wrapper">
+        <span class="closeIcon"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="chatbox">
+            <h2> Ai Chatbot </h2>
+        </div>
+        <div class="loginBox">
+            <h2>Login</h2>
+            
+               
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" name="email" id="emailL" required>
+                    <label>Email</label>
+
+                </div>
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" name="password" id="passwordL" required>
+                    <label>Password</label>
+
+                </div>
+        
+               
+               <input type="submit" id="signin" value="Login" class="btn">
+                
+                <div class="loginRegister">
+                    <p>Don't Have an account  <a href="#" class="registerlink">Register</a></p>
+                </div>
+            
+            
+        </div>
+
+        <div class="registerBox">
+            <h2>Register</h2>
+            <div class="form">
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <input type="text" name="username" id="usernameC" required>
+                    <label>Username</label></div>
+             
+               
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="email" name="email" id="emailC" required>
+                    <label>Email</label>
+
+                </div>
+                <div class="inputbox">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" name="password" id="passwordC" required>
+                    <label>Password</label>
+
+                </div>
+                <input type="submit" id="signup" value="Create Account" class="btn">
+                
+                <div class="loginRegister">
+                    <p> Alredy have an account  <a href="#" class="loginlink">Login</a></p>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+    <script type="module">
+      
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        
+      
+
+
+
+
+
+//old config
+       
+        
+     
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGYH0CeVCQDESjcJdvikoKmeOyhLCYoyk",
+            authDomain: "grand-lekage-web.firebaseapp.com",
+            projectId: "grand-lekage-web",
+            storageBucket: "grand-lekage-web.appspot.com",
+            messagingSenderId: "185245033432",
+            appId: "1:185245033432:web:258e597d6b2b7ad46f48ad",
+            measurementId: "G-B4GCWFR374"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database=getDatabase(app);
+        const analytics = getAnalytics(app);
+        const auth = getAuth();
+        // Create new user account .....
+        signup.addEventListener("click",(e)=>{
+          var email=document.getElementById("emailC").value;
+          var password=document.getElementById("passwordC").value;
+          var username=document.getElementById("usernameC").value;
+          console.log(auth);
+         
+          createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            const user = userCredential.user;
+            console.log("created New user account successfully....");
+            window.location.href="index.html";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+            console.log(errorMessage)
+          });
+        })
+        // Login to new usert account ... 
+        signin.addEventListener("click",(e)=>{
+          var email=document.getElementById("emailL").value;
+          var password=document.getElementById("passwordL").value;
+        
+          signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            const user = userCredential.user;
+            console.log("successfully loggedin");
+            window.location.href="home.html";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+            console.log(errorMessage)
+          
+            
+          });
+
+        })
+    
+        
+      </script>
+
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="login1.js"></script>
+
+</body>
+</html>
