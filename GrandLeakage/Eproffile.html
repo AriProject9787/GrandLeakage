@@ -167,10 +167,11 @@
         
 
         //Writing data on database
-        function writeUserData(usernumber, username, useremail, userdob, userpassword){
+        function writeUserData(usernumber, username, useremail, userdob, userpassword,uid){
   
-            set(ref(db, 'users/' + usernumber), {
+            set(ref(db, 'users/' + uid), {
                 Name: username,
+                UserId: uid,
                 Password: userpassword,
                 Email: useremail,
                 Phonenumber: usernumber,
@@ -181,8 +182,10 @@
            
             
         }
+        const uid=localStorage.getItem("UserId");
         
-        writeUserData("9787452790","Arirama Selvam M","blackarch9787@gmail.com","2004-07-08","M.Harish9787");
+            writeUserData("9787452790","Arirama Selvam M","mharishmharish121@gmail.com","2004-07-08","M.Harish9787","1gmnE2uXFMURrk6Ex5zIBtlj3gz1");
+        
         
         
         userForm.onsubmit=()=>{
@@ -194,17 +197,10 @@
             var email=userEmail.value;
             var dob=userDob.value;
             var phonenumber=userNumber.value;
-            writeUserData(phonenumber,name,email,dob,password);
+            var uid=localStorage.getItem("UserId");
+        
+            writeUserData(phonenumber,name,email,dob,password,uid);
            
-         
-         
-
-                
-            
-          
-           
-
-         
 
         };
      
