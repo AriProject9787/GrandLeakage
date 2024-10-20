@@ -22,6 +22,8 @@
 </head>
 <body>
     <div id="profile">
+        <h1>Please Edit your Profile</h1>
+        <a href="Eproffile.html"><button id="but">Edit Profile</button></a>
         
     </div>
 
@@ -55,8 +57,9 @@ get(child(dbref, `/${uid}`)).then((snapshot) => {
             console.log(data.Name);
             const articleContainer = document.getElementById('profile');
             articleContainer.innerHTML = `
-            <img src="${data.ImageUrl}" alt="." id="img" class="img">
+            <img src="${data.ImageUrl}" alt="Wrong Image Link" id="img" class="img">
             <a href="Eproffile.html"><button id="but">Edit Profile</button></a>
+            
             <small  id="about">Don’t Copy, Pick Your Own Style 😊</small>
                 
                            <table>
