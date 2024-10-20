@@ -96,6 +96,7 @@
                 <div class="center"><Label for="firstname"> First Name: </Label><input type="text"  id="fname" placeholder=" First Name "></div><br>
                 <div class="center"><Label for="lastname"> Last Name: </Label><input type="text" placeholder=" Last Name " id="lname"></div><br>
                 <div class="center"><Label for="password">  Password: </Label><input type="password"  id="password" placeholder=" Password "></div><br>
+                <div class="center"><Label for="imgurl"> Profile ImageUrl: </Label><input type="text" placeholder="imgurl link" id="imgurl"></div><br>
                 
                 <div class="center"><Label for="email"> Gmail: </Label><input required type="email" placeholder=" Enter your Gmail " id="gmail"></div><br>
                 <div class="center"><Label for="phonenumber"> Phone Number: </Label><input size="10" min="1000000000" max="10000000000" type="number" placeholder=" Phone Number " id="number"></div><br>
@@ -162,12 +163,13 @@
         const userDob=document.getElementById("dob");
         const userEmail=document.getElementById("gmail");
         const userForm=document.getElementById("formid");
+        const ImgUrl=document.getElementById("imgurl");
         const btn=document.getElementById("signup");
         console.log(app);
         
 
         //Writing data on database
-        function writeUserData(usernumber, username, useremail, userdob, userpassword,uid){
+        function writeUserData(usernumber, username, useremail, userdob, userpassword,uid,imgurl){
   
             set(ref(db, 'users/' + uid), {
                 Name: username,
@@ -175,7 +177,8 @@
                 Password: userpassword,
                 Email: useremail,
                 Phonenumber: usernumber,
-                Dob: userdob
+                Dob: userdob,
+                ImageUrl: imgurl
 
 
             });
@@ -184,7 +187,7 @@
         }
         const uid=localStorage.getItem("UserId");
         
-            writeUserData("9787452790","Arirama Selvam M","mharishmharish121@gmail.com","2004-07-08","M.Harish9787","1gmnE2uXFMURrk6Ex5zIBtlj3gz1");
+            writeUserData("9787452790","Arirama Selvam M","mharishmharish121@gmail.com","2004-07-08","M.Harish9787","1gmnE2uXFMURrk6Ex5zIBtlj3gz1","https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.7iFXTYBnK4E0XV4myRaPbQHaFW%26pid%3DApi&f=1&ipt=5547940d87b2bf2cfae5e8e2f842d8ce5564943361bddab6d10f09ce9e5ba3fb&ipo=images");
         
         
         
@@ -196,10 +199,12 @@
             var password=userPassword.value;
             var email=userEmail.value;
             var dob=userDob.value;
+            var imgurl=ImgUrl.value;
             var phonenumber=userNumber.value;
             var uid=localStorage.getItem("UserId");
         
-            writeUserData(phonenumber,name,email,dob,password,uid);
+            writeUserData(phonenumber,name,email,dob,password,uid,imgurl);
+            window.location.href="proffile.html";
            
 
         };
