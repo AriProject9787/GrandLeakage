@@ -10,10 +10,11 @@ header{
     left: 0;
     width: 100%;
     padding: 20px 100px;
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: center;
     z-index: 99;
+    
 }
 .logo{
     color:#fff;
@@ -27,6 +28,7 @@ header{
     font-weight: 500;
     margin-left: 40px;
     cursor: pointer;
+
 }
 .navigation .buttonLogin{
     width: 130px;
@@ -269,3 +271,20 @@ body{
 
 
 /* login popup settings code end */
+
+@media only screen and (max-width: 600px) {
+    nav a{
+        display: block;
+        
+        margin: 25%;
+        
+    }
+    nav{
+        background-color: rgba(78, 74, 74, 0.247);
+        width: 99%;
+        margin: 10%;
+        padding: 10%;
+        border-radius: 5%;
+        box-shadow: 0 0 30px rgba(0,0,0,.5);
+    }
+}
