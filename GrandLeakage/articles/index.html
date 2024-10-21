@@ -8,7 +8,7 @@
 </head>
 <body class="body">
     <header>
-        <h1 class="title"><marquee><span class="highlight">Grand-Leak.com </span>- News Portal.Com</marquee></h1>
+        <h1 class="title"><marquee><span class="highlight">Grand-Leak.com </span>- Hacking Portal.Com</marquee></h1>
         <nav class="nav">
             <a href="https://www.instagram.com/masstalkies.mt/"><div class="instagram"><ion-icon name="logo-instagram"></ion-icon></div></a>
             <button class="buttonLogin">Login</button>
@@ -86,14 +86,13 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     
         const firebaseConfig = {
-            apiKey: "AIzaSyDH91jgSKu8tZ2ejyAHwfdTgC5TcqJ4S_k",
-            authDomain: "tutinews9787.firebaseapp.com",
-            databaseURL: "https://tutinews9787-default-rtdb.firebaseio.com",
-            projectId: "tutinews9787",
-            storageBucket: "tutinews9787.appspot.com",
-            messagingSenderId: "119887551138",
-            appId: "1:119887551138:web:a2bf8fb758b0eed01015fb",
-            measurementId: "G-XWL9RWC9LN"
+            apiKey: "AIzaSyAGYH0CeVCQDESjcJdvikoKmeOyhLCYoyk",
+            authDomain: "grand-lekage-web.firebaseapp.com",
+            projectId: "grand-lekage-web",
+            storageBucket: "grand-lekage-web.appspot.com",
+            messagingSenderId: "185245033432",
+            appId: "1:185245033432:web:258e597d6b2b7ad46f48ad",
+            measurementId: "G-B4GCWFR374"
         };
 
         // Initialize Firebase
@@ -113,7 +112,7 @@
 
         // Fetch articles from Firebase
         function fetchArticles() {
-            const dbRef = ref(db, 'news');
+            const dbRef = ref(db, 'hack/');
             get(dbRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     allArticles = Object.values(snapshot.val());
