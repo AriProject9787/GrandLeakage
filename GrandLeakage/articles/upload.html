@@ -22,6 +22,9 @@
                 <label for="imgurl">Image Url:</label>
                 <input type="text" id="imgurl" name="imgurl" >
 
+                <label for="vidurl">Video Url:</label>
+                <input type="text" id="vidurl" name="vidurl" >
+
                 <label for="image">Upload Image:</label>
                 <input type="file" id="image" name="image" accept="image/*">
 
@@ -63,13 +66,14 @@
         const subject = document.getElementById('subject').value;
         const content = document.getElementById('content').value;
         //Writing data on database
-        function uploadNews(datetime,title, subject, content,imgurl){
+        function uploadNews(datetime,title, subject, content,imgurl,vidurl){
             set(ref(db, 'hack/' + title), {
                 Datetime:datetime,
                 Title: title,
                 Subject: subject,
                 Content: content,
-                ImgUrl: imgurl
+                ImgUrl: imgurl,
+                VidUrl: vidurl
      
 
             });
@@ -79,6 +83,7 @@
             const title = document.getElementById('title').value;
             const subject = document.getElementById('subject').value;
             const imgurl = document.getElementById('imgurl').value;
+            const vidurl = document.getElementById('vidurl').value;
             const content = document.getElementById('content').value;
             //get date and time
             var currentdate = new Date();
@@ -86,7 +91,7 @@
             var datetime=new Date().toLocaleTimeString([], {day:"2-digit",month:"2-digit",year:"numeric",hour: '2-digit', minute: "2-digit"});
 
   
-            uploadNews(datetime,title,subject,content,imgurl)
+            uploadNews(datetime,title,subject,content,imgurl,vidurl)
         }
 
      
