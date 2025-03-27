@@ -28,13 +28,16 @@ header {
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     border: 5px solid #fff;
     margin-bottom: 15px;
 }
 
+span{
+    color: darkorange;
+}
 /* Sections */
 section {
     background: #fff;
@@ -101,8 +104,8 @@ footer {
     }
 
     .profile-pic {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
     }
 
     .social-links ul {
