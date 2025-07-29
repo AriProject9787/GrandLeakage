@@ -8,26 +8,39 @@
     <meta name="author" content="Arirama Selvam M">
     <title>Arirama Selvam M - Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <ul class="navbar">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#social-links">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header>
         <div class="container">
             <img src="images/profile.jpg" alt="Arirama Selvam M" class="profile-pic">
-            <img src="images/IV.jpg" alt="Arirama Selvam M" class="hide">
-            <img src="images/IV2.jpg" alt="Arirama Selvam M" class="hide">
             <h1>Arirama Selvam M</h1>
             <p>Fresher in Computer Science | Passionate About Coding & Technology</p>
         </div>
     </header>
 
-    <section class="about">
+    <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
             <p>I'm a Computer Science Engineering student at Dr. G. U. Pope College of Engineering, passionate about web development, programming, and cybersecurity.</p>
         </div>
     </section>
 
-    <section class="education">
+    <section id="education" class="education">
         <div class="container">
             <h2>Education</h2>
             <ul>
@@ -37,17 +50,19 @@
         </div>
     </section>
 
-    <section class="projects">
+    <section id="projects" class="projects">
         <div class="container">
             <h2>Projects</h2>
             <ul>
-                <li><strong>ECommerce Website</strong> – Built using HTML, CSS, and JavaScript.</li>
+                <li><strong>ECommerce Website</strong> – Built using HTML, CSS,Firebase and JavaScript.</li>
+                <li><strong>Quiz Website</strong> – Built using HTML, CSS, and JavaScript.</li>
+                <li><strong>Portfolio Website</strong> – Developed using HTML, CSS, and JavaScript.</li>
                 <li><strong>Student Management System</strong> – Developed using HTML, CSS, JavaScript, and PHP.</li>
             </ul>
         </div>
     </section>
 
-    <section class="skills">
+    <section id="skills" class="skills">
         <div class="container">
             <h2>Skills</h2>
             <ul>
@@ -61,7 +76,7 @@
         </div>
     </section>
 
-    <section class="achievements">
+    <section id="achievements" class="achievements">
         <div class="container">
             <h2>Achievements</h2>
             <ul>
@@ -70,22 +85,39 @@
         </div>
     </section>
 
-    <section class="social-links">
+    <section id="social-links" class="social-links">
         <div class="container">
             <h2>Connect with Me</h2>
             <ul>
-                <li><a href="https://github.com/AriProject9787" target="_blank">GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/ariramaselvam" target="_blank">LinkedIn</a></li>
-                <li><a href="https://instagram.com/haris984290" target="_blank">Instagram</a></li>
-                <li><a href="mailto:ariofficial9787@gmail.com">Email Me</a></li>
+                <li><a href="https://github.com/AriProject9787" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/ariramaselvam" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                <li><a href="https://instagram.com/hack_tech_tamil" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="mailto:ariofficial9787@gmail.com"><i class="fas fa-envelope"></i> Email Me</a></li>
             </ul>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 <span>Arirama Selvam M </span>| All rights reserved</p>
+            <p>&copy; 2025 <span>Arirama Selvam M</span> | All rights reserved</p>
         </div>
     </footer>
+
+    <script>
+  window.location.replace("https://ariproject9787.github.io/portfolio/");
+</script>
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
